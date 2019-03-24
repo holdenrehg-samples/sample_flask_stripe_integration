@@ -75,6 +75,8 @@ $ docker-compose up
 Make sure to leave the application running before running any migration commands:
 
 ```sh
+$ docker exec -it $(docker ps -q --filter name=mystripeapp_app) flask db init
+$ docker exec -it $(docker ps -q --filter name=mystripeapp_app) flask db migrate
 $ docker exec -it $(docker ps -q --filter name=mystripeapp_app) flask db upgrade
 ```
 
@@ -84,7 +86,11 @@ You'll be able to access at http://mystripeapp.local:5200 .
 
 ---
 
-## Running the tests
+## Testing the application manually
+
+You can create an account using fake Stripe cards found at https://stripe.com/docs/testing . Use these on the http://mystripeapp.local:5200/register registration form.
+
+## Running automated tests
 
 ```sh
 $ python3 setup.py test --container $(docker ps -q --filter name=mystripeapp_app)

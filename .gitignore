@@ -11,3 +11,4 @@ dist
 ./storage/logs/*.log*
 htmlcov/
 ./coverage
+./migrations/
