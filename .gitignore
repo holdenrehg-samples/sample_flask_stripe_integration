@@ -1,7 +1,7 @@
 MANIFEST
 .cache/
 build/
-env.py
+./env.py
 *.egg-info/
 *.pyc
 *.swp
