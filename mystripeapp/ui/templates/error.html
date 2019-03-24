@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>mystripeapp - There was a problem</title>
+    <link rel="shortcut icon" href="/static/images/favicon.ico" />
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="/static/css/app.css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+
+<body>
+    <div class="error_page">
+        <div class="container inner-wrapper">
+            <h1 class="error-heading">
+              {% block errorCode %}{% endblock %}
+            </h1>
+            <h2 class="error-code">{% block title %}{% endblock %}</h2>
+            <p class="error-message">{% block summary %}{% endblock %}</p>
+            <a class="btn btn-primary" href="/">Go Home</a>
+        </div>
+    </div>
+</body>
+
+</html>

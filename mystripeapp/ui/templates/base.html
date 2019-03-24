@@ -1,0 +1,25 @@
+<html>
+
+<head>
+    <title>mystripeapp</title>
+    <link rel="shortcut icon" href="/static/images/favicon.ico" />
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="/static/css/app.css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <!-- JS -->
+    <script src="https://js.stripe.com/v3/"></script>
+
+    {% block head %}{% endblock %}
+</head>
+
+<body>
+    <div class="container inner-wrapper">
+        <h2 >{% block title %}{% endblock %}</h2>
+        {% block content %}{% endblock %}
+    </div>
+</body>
+
+</html>

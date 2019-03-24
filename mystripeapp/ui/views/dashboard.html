@@ -1,0 +1,43 @@
+{% extends "templates/base.html" %}
+
+{% block title %}mystripeapp - your dashboard!{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <ul>
+            <li><a href="/logout">Logout</a></li>
+        </ul>
+    </div>
+
+    <div class="row" style="margin: 1rem 0;">
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="card-header">
+                    Profile
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">{{ user.name }}</h5>
+                    <p class="card-text">Email: {{ user.email }}</p>
+                    <p class="card-text">Created: {{ user.created_at }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row" style="margin: 1rem 0;">
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Payment Details</h5>
+                    <h6 class="card-subtitle mb-2 text-muted"></h6>
+                    <p class="card-text">************{{ user.last_four }}</p>
+                    <form id="delete-account-form" action="/account/delete" method="POST">
+                        <button class="btn btn-danger">Delete Account</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

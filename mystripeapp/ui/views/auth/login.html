@@ -1,0 +1,42 @@
+{% extends "templates/base.html" %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <div class="card">
+                <div class="card-header">
+                    Login
+                </div>
+                <div class="card-body">
+                    <p class="card-subtitle mb-2 text-muted">Don't have an account? <a href="/register">Register here</a>. Or <a href="/">go home</a>.</p>
+
+                    <form method="post" action="/login" id="login-form">
+                        {{ form.csrf_token }}
+
+                        <div class="form-group">
+                            <input type="email" name="email" class="form-control" placeholder="Email" pattern=".{1,64}" value="{{ form.data.email or '' }}" autofocus required>
+
+                            {% if form.errors and 'email' in form.errors %}
+                            <div class="form-errors" role="alert">{{ form.errors.email[0] }}</div>
+                            {% endif %}
+                        </div>
+
+                        <div class="form-group">
+                            <input type="password" name="password" class="form-control" value="" placeholder="Password" pattern=".{8,64}" title="Minimum length of 8 characters" required>
+
+                            {% if form.errors and 'password' in form.errors %}
+                            <div class="form-errors" role="alert">{{ form.errors.password[0] }}</div>
+                            {% endif %}
+                        </div>
+
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary">Sign In</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

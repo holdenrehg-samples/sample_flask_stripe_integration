@@ -1,0 +1,13 @@
+MANIFEST
+.cache/
+build/
+env.py
+*.egg-info/
+*.pyc
+*.swp
+*.egg
+.vscode/
+dist
+./storage/logs/*.log*
+htmlcov/
+./coverage

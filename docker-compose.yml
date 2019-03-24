@@ -1,0 +1,58 @@
+version: '3.3'
+
+services:
+
+  # Application container for the Flask app
+  app:
+    build: .
+    ports:
+      - 5200:5000
+    volumes:
+      - .:/mystripeapp
+    environment:
+      - TERM=xterm-256color
+      - FLASK_APP=mystripeapp.bootstrap:app
+      - LC_ALL=C.UTF-8
+      - LANG=C.UTF-8
+    networks:
+      - appnet
+    hostname: "mystripeapp.local"
+    networks:
+       appnet:
+          aliases:
+            - "mystripeapp.local"
+
+  # Primary database container for the app
+  mariadb:
+    image: 'bitnami/mariadb:latest'
+    restart: always
+    ports:
+      - "10504:3306"
+    networks:
+      - appnet
+    environment:
+      - TERM=xterm-256color
+      - ALLOW_EMPTY_PASSWORD=no
+      - MARIADB_ROOT_PASSWORD=random_root_password
+      - MARIADB_USER=stripeapp
+      - MARIADB_DATABASE=stripeapp
+      - MARIADB_PASSWORD=stripeapp
+
+  # Database container strictly for running tests
+  testmariadb:
+    image: 'bitnami/mariadb:latest'
+    restart: always
+    ports:
+      - "10505:3306"
+    networks:
+      - appnet
+    environment:
+      - TERM=xterm-256color
+      - ALLOW_EMPTY_PASSWORD=no
+      - MARIADB_ROOT_PASSWORD=random_root_password
+      - MARIADB_USER=stripeapptest
+      - MARIADB_DATABASE=stripeapptest
+      - MARIADB_PASSWORD=stripeapptest
+
+networks:
+  appnet:

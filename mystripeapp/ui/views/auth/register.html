@@ -1,0 +1,120 @@
+{% extends "templates/base.html" %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <div class="card">
+                <div class="card-header">
+                    Register
+                </div>
+                <div class="card-body">
+                    <p class="card-subtitle mb-2 text-muted">Already have an account, <a href="/login">sign in here</a>. Or <a href="/">go home</a>.</p>
+
+                    <form method="post" action="/register" id="register-form">
+                        {{ form.csrf_token }}
+
+                        <div class="form-group">
+                            <input type="text" name="name" class="form-control" value="{{ form.data.name or '' }}" placeholder="Name" pattern=".{1,64}" autofocus required>
+
+                            {% if form.errors and 'name' in form.errors %}
+                            <div class="form-errors" role="alert">{{ form.errors.name[0] }}</div>
+                            {% endif %}
+                        </div>
+
+                        <div class="form-group">
+                            <input type="email" name="email" class="form-control" value="{{ form.data.email or '' }}" placeholder="Email" pattern=".{1,64}" required>
+
+                            {% if form.errors and 'email' in form.errors %}
+                            <div class="form-errors" role="alert">{{ form.errors.email[0] }}</div>
+                            {% endif %}
+                        </div>
+
+                        <div class="form-group">
+                            <input type="password" name="password" class="form-control" value="" placeholder="Password" pattern=".{8,64}" title="Minimum length of 8 characters" required>
+
+                            {% if form.errors and 'password' in form.errors %}
+                            <div class="form-errors" role="alert">{{ form.errors.password[0] }}</div>
+                            {% endif %}
+                        </div>
+
+                        <div class="form-group">
+                            <div id="card-element">
+                                <!-- A Stripe Element will be inserted here. -->
+                            </div>
+
+                            <!-- Used to display form errors. -->
+                            <div id="card-errors" role="alert"></div>
+                            {% if form.errors and 'stripeToken' in form.errors %}
+                            <div class="form-errors" role="alert">{{ form.errors.stripeToken[0] }}</div>
+                            {% endif %}
+                        </div>
+
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary">Register</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Create a Stripe client.
+    var stripe = Stripe('pk_test_VCz844w573hrF7vwGeQB8pET');
+
+    // Create an instance of Elements.
+    var elements = stripe.elements();
+
+    // Create an instance of the card Element.
+    var card = elements.create('card');
+
+    // Add an instance of the card Element into the `card-element` <div>.
+    card.mount('#card-element');
+
+    card.addEventListener('change', function(event) {
+        var displayError = document.getElementById('card-errors');
+        if (event.error) {
+            displayError.textContent = event.error.message;
+        } else {
+            displayError.textContent = '';
+        }
+    });
+
+    function stripeTokenHandler(token) {
+        // Insert the token ID into the form so it gets submitted to the server
+        var form = document.getElementById('register-form');
+
+        var tokenHiddenInput = document.createElement('input');
+        tokenHiddenInput.setAttribute('type', 'hidden');
+        tokenHiddenInput.setAttribute('name', 'stripeToken');
+        tokenHiddenInput.setAttribute('value', token.id);
+        form.appendChild(tokenHiddenInput);
+
+        var lastFourHiddenInput = document.createElement('input');
+        lastFourHiddenInput.setAttribute('type', 'hidden');
+        lastFourHiddenInput.setAttribute('name', 'lastFour');
+        lastFourHiddenInput.setAttribute('value', token.card.last4);
+        form.appendChild(lastFourHiddenInput);
+
+        // Submit the form
+        form.submit();
+    }
+
+    // Create a token or display an error when the form is submitted.
+    var form = document.getElementById('register-form');
+    form.addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        stripe.createToken(card).then(function(result) {
+            if (result.error) {
+                var errorElement = document.getElementById('card-errors');
+                errorElement.textContent = result.error.message;
+            } else {
+                stripeTokenHandler(result.token);
+            }
+        });
+    });
+</script>
+{% endblock %}
