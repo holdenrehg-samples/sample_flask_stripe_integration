@@ -52,6 +52,13 @@ def environment():
     }
 ```
 
+It's also information for you to add your public stripe key to the javascript on the register form. See the `mystripeapp/ui/views/auth/register.html` file.
+
+```javascript
+// Create a Stripe client.
+var stripe = Stripe('****');
+```
+
 ---
 
 ## Running the application
