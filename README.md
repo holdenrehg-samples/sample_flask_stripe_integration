@@ -2,6 +2,8 @@
 
 Sample Flask + Stripe application.
 
+[Tutorial and explanation written up on medium.](https://medium.com/@reedrehg/a-flask-stripe-saas-template-cab289c11316)
+
 ---
 
 ## Getting setup
