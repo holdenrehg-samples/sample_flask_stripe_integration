@@ -1,5 +1,6 @@
-from .bootstrap import app
 from flask import render_template
+
+from .bootstrap import app
 
 
 @app.errorhandler(500)

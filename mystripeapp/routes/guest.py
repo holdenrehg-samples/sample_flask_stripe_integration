@@ -1,13 +1,11 @@
-from mystripeapp.bootstrap import app
-from flask import render_template, abort
+from flask import abort, render_template
 from jinja2 import TemplateNotFound
+
+from mystripeapp.bootstrap import app
 
 
 @app.route("/")
 def welcome():
-    """
-    Show the landing page.
-    """
     try:
         return render_template("views/landing.html")
     except TemplateNotFound:

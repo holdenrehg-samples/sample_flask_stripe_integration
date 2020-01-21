@@ -74,12 +74,10 @@ $ docker-compose up
 
 ### Migrate the database
 
-Make sure to leave the application running before running any migration commands:
+Make sure to leave the application running before migrating the database:
 
 ```sh
-$ docker exec -it $(docker ps -q --filter name=mystripeapp_app) flask db init
-$ docker exec -it $(docker ps -q --filter name=mystripeapp_app) flask db migrate
-$ docker exec -it $(docker ps -q --filter name=mystripeapp_app) flask db upgrade
+$ docker-compose exec app flask db upgrade
 ```
 
 ### Access the application

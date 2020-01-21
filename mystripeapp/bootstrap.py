@@ -1,13 +1,15 @@
-import sys
-import logging
 import datetime
-import sqlalchemy
+import logging
+import sys
 from logging import Formatter
+
+import sqlalchemy
 from flask import Flask
 from flask_login import LoginManager
 from flask_migrate import Migrate
-from flask_sqlalchemy import SQLAlchemy, Model
+from flask_sqlalchemy import Model, SQLAlchemy
 from sqlalchemy.ext.declarative import declared_attr
+
 from mystripeapp import utils
 
 
@@ -20,9 +22,7 @@ def start(override=None):
     env = utils.environment()
 
     app = Flask(
-        __name__,
-        template_folder="/mystripeapp/mystripeapp/ui",
-        static_folder="/mystripeapp/mystripeapp/ui/static",
+        __name__, template_folder="/mystripeapp/mystripeapp/ui", static_folder="/mystripeapp/mystripeapp/ui/static",
     )
 
     configuration = dict(
@@ -64,25 +64,17 @@ def start(override=None):
 
 class BaseModel(Model):
     """
-    The base model for all database models.
-
-    This will include some common columns for all tables:
-
-      - id
-      - created_at
+    The base model for all database models. This will include some common
+    columns for all tables:
     """
 
     @declared_attr
     def id(self):
-        return sqlalchemy.Column(
-            sqlalchemy.Integer, primary_key=True, autoincrement=True, nullable=False
-        )
+        return sqlalchemy.Column(sqlalchemy.Integer, primary_key=True, autoincrement=True, nullable=False)
 
     @declared_attr
     def created_at(self):
-        return sqlalchemy.Column(
-            sqlalchemy.DateTime, default=datetime.datetime.utcnow, nullable=False
-        )
+        return sqlalchemy.Column(sqlalchemy.DateTime, default=datetime.datetime.utcnow, nullable=False)
 
 
 app = start()

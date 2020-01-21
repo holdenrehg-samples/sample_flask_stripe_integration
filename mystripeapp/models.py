@@ -1,9 +1,10 @@
 import sqlalchemy
 from flask import url_for
-from sqlalchemy.ext.declarative import declared_attr
-from mystripeapp.bootstrap import app, db
 from flask_login.mixins import UserMixin
+from sqlalchemy.ext.declarative import declared_attr
 from werkzeug.security import check_password_hash, generate_password_hash
+
+from mystripeapp.bootstrap import app, db
 
 
 class User(db.Model, UserMixin):

@@ -1,7 +1,7 @@
-import setuptools
-from setuptools import Command, find_packages, setup
 from subprocess import call
 
+import setuptools
+from setuptools import Command, find_packages, setup
 
 with open("README.md", "r") as fh:
     long_description = fh.read()
