@@ -10,7 +10,7 @@ def environment():
     """
     return {
         "app": {"name": "mystripeapp.local", "port": "5200", "secret": "my_super_secret_key"},
-        "billing": {"stripe": {"token": "****", "product": "****"}},
+        "billing": {"stripe": {"token": "****", "product": "****", "pricing_plan": "****" }},
         "database": {
             "provider": "mysql",
             "host": "mariadb",
