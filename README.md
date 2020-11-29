@@ -30,7 +30,7 @@ $ git clone https://github.com/holdenrehg/sample_flask_stripe_integration mystri
 
 There is a set of environment variables located under `mystripeapp/utils/__init__.py` that need to be updated before running the application
 
-The only two environment variables that you should need to change to get the application up and running are the stripe token and the stripe product code.
+The only two environment variables that you should need to change to get the application up and running are the stripe token, product, and pricing plan codes.
 
 ```python
 def environment():
@@ -42,7 +42,7 @@ def environment():
     """
     return {
         "app": {"name": "mystripeapp.local", "port": "5200", "secret": "my_super_secret_key"},
-        "billing": {"stripe": {"token": "****", "product": "****"}},
+        "billing": {"stripe": {"token": "****", "product": "****", "pricing_plan": "****" }},
         "database": {
             "provider": "mysql",
             "host": "mariadb",

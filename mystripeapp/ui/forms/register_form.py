@@ -55,11 +55,13 @@ class RegisterForm(FlaskForm):
         customer = stripe.Customer.create(
             description=self.name.data,
             source=self.stripeToken.data,
-            metadata={"customer_code": user.id},
+            name=user.name,
+            email=user.email,
+            metadata={"customer_code": user.id, "email": user.email},
         )
 
         subscription = stripe.Subscription.create(
-            customer=customer.id, items=[{"plan": env["billing"]["stripe"]["product"]}]
+            customer=customer.id, items=[{"plan": env["billing"]["stripe"]["pricing_plan"]}]
         )
 
         return customer, subscription

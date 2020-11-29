@@ -1,10 +1,10 @@
-FROM ubuntu:18.10
+FROM python:3.9-slim-buster
 
 RUN mkdir -p /mystripeapp
 RUN touch /var/log/mystripeapp.log
 
 RUN apt-get update -y
-RUN DEBIAN_FRONTEND=noninteractive apt-get install -y vim python3-pip python3-dev ipython3 build-essential libmariadbclient-dev tzdata
+RUN DEBIAN_FRONTEND=noninteractive apt-get install -y libmariadbclient-dev tzdata build-essential
 
 RUN ln -fs /usr/share/zoneinfo/UTC /etc/localtime
 RUN dpkg-reconfigure --frontend noninteractive tzdata
