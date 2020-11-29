@@ -1,7 +1,7 @@
 flask==1.0
 flask_sqlalchemy==2.3.2
 Flask-Login==0.4.1
-Flask-WTF==0.14.2
+Flask-WTF==0.14.3
 Flask-Mail==0.9.1
 Flask-Testing==0.7.1
 Flask-Migrate==2.4.0
@@ -15,3 +15,6 @@ stripe==2.21.0
 apscheduler>=3.2.0
 python-dateutil>=2.4.2
 tzlocal==1.5.1
+SQLAlchemy-Utils==0.36.8
+Werkzeug==1.0.1
+email-validator==1.1.2
