@@ -12,6 +12,9 @@ from sqlalchemy.ext.declarative import declared_attr
 
 from mystripeapp import utils
 
+from sqlalchemy_utils import UUIDType
+import uuid
+
 
 def start(override=None):
     """
@@ -70,7 +73,8 @@ class BaseModel(Model):
 
     @declared_attr
     def id(self):
-        return sqlalchemy.Column(sqlalchemy.Integer, primary_key=True, autoincrement=True, nullable=False)
+        # This will materialize as a CHAR(32) in MariaDB. The UUID will be a stringified hex value.
+        return sqlalchemy.Column(UUIDType(binary=False), primary_key=True, nullable=False, default=uuid.uuid4())
 
     @declared_attr
     def created_at(self):
